@@ -34,10 +34,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
+      <div className='main'>
         <h1>City Explorer </h1>
         {/* <button onClick={this.gitdataLocation}>Explore!</button> */}
-        <form onSubmit={this.gitdataLocation}>
+        <form onSubmit={this.gitdataLocation} className="form">
           <input type="text" placeholder="Name of the city" name="city" />
           <button type="submit"> Explore! </button>
         </form>
@@ -47,7 +47,7 @@ class App extends React.Component {
         {this.state.showMap && 
         <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`}/>}
         
-      </>
+      </div>
     )
   }
 }
