@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.form{
+  margin: 10px;
+}
+h1{
+  text-align: center;
+}
+/* .main{
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHbz61tlCLB8uXLUyTdCuIpmVjxgp2BU7NA&usqp=CAU);
+} */
