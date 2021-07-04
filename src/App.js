@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import React from 'react';
+import axios from 'axios';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityData: {},
+      showDataofCity: '',
+      showMap:false
+    }
+  }
+  gitdataLocation = async (e) => {
+    e.preventDefault();
+
+    await this.setState({
+      showDataofCity: e.target.city.value
+    })
+
+
+    let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_KEY}&q=${this.state.showDataofCity}&format=json`;
+    let resData = await axios.get(url);
+
+    console.log(resData);
+    console.log(resData.data);
+    this.setState({
+      cityData: resData.data[0],
+      showMap:true
+    })
+
+
+  }
+
+  render() {
+    return (
+      <>
+        <h1>City Explorer </h1>
+        {/* <button onClick={this.gitdataLocation}>Explore!</button> */}
+        <form onSubmit={this.gitdataLocation}>
+          <input type="text" placeholder="Name of the city" name="city" />
+          <button type="submit"> Explore! </button>
+        </form>
+        <p>City Name :{this.state.cityData.display_name}</p>
+        <p>Latitude :{this.state.cityData.lat}</p>
+        <p>Longitude :{this.state.cityData.lon}</p>
+        {this.state.showMap && 
+        <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`}/>}
+        
+      </>
+    )
+  }
 }
 
 export default App;
