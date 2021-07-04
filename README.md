@@ -92,3 +92,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Name of feature: ______________Lab: Class 06__________________
+
+Estimate of time needed to complete: __5h___
+
+Start time: __1pm___
+
+Finish time: _7pm____
+
+Actual time needed to complete: ___7-8h__
