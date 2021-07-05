@@ -2,13 +2,18 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
+import Weather from './Weather';
+
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       cityData: {},
       showDataofCity: '',
-      showMap:false
+      showMap:false,
+      weathSelected:[]
     }
   }
   gitdataLocation = async (e) => {
@@ -28,8 +33,16 @@ class App extends React.Component {
       cityData: resData.data[0],
       showMap:true
     })
+    // =======================================
+
+    let url2=`https://class07-back-end.herokuapp.com/getCityInfo?cityy=${this.state.showDataofCity}&format=json`
 
 
+    let weather = await axios.get(url2)
+    await this.setState({
+      WeatherInformation: weather.data,
+    
+    })
   }
 
   render() {
@@ -46,7 +59,7 @@ class App extends React.Component {
         <p>Longitude :{this.state.cityData.lon}</p>
         {this.state.showMap && 
         <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`}/>}
-        
+        <Weather />
       </div>
     )
   }
