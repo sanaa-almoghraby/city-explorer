@@ -23,14 +23,18 @@ class App extends React.Component {
     await this.setState({
       showDataofCity: e.target.city.value
     })
-
-
+    
     let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_KEY}&q=${this.state.showDataofCity}&format=json`;
+    
     let resData = await axios.get(url);
 
+
+
+
     console.log(resData);
-    console.log(resData.data);
-    this.setState({
+    console.log(resData.data[0]);
+
+    await this.setState({
       cityData: resData.data[0],
       showMap: true
     })
@@ -38,6 +42,7 @@ class App extends React.Component {
 
     this.funwether();
   }
+
   funwether = async () => {
     // let city=this.state.showDataofCity
     const city = this.state.showDataofCity.charAt(0).toUpperCase() + this.state.showDataofCity.slice(1);
@@ -67,7 +72,7 @@ class App extends React.Component {
         <h1>City Explorer </h1>
         {/* <button onClick={this.gitdataLocation}>Explore!</button> */}
         <form onSubmit={this.gitdataLocation} className="form">
-          <input type="text" placeholder="Name of the city" name="city" />
+          <input type="text" placeholder="Name of the city" name="city"/>
           <button type="submit"> Explore! </button>
         </form>
         <p>City Name :{this.state.cityData.display_name}</p>
