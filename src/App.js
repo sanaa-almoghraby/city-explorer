@@ -2,7 +2,7 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-import Weather from './Weather';
+// import Weather from './Weather';
 
 
 
@@ -12,8 +12,8 @@ class App extends React.Component {
     this.state = {
       cityData: {},
       showDataofCity: '',
-      showMap:false,
-      weathSelected:[]
+      showMap: false,
+      WeatherData: []
     }
   }
   gitdataLocation = async (e) => {
@@ -31,20 +31,24 @@ class App extends React.Component {
     console.log(resData.data);
     this.setState({
       cityData: resData.data[0],
-      showMap:true
+      showMap: true
     })
     // =======================================
-
-    let url2=`https://class07-back-end.herokuapp.com/getCityInfo?cityy=${this.state.showDataofCity}&format=json`
-
-
-    let weather = await axios.get(url2)
-    await this.setState({
-      WeatherInformation: weather.data,
-    
-    })
   }
+  // // funwether = () => {
 
+  // //   let url2 = `http://class07-back-end.herokuapp.com/getCityInfo?cityy=${this.state.showDataofCity}&format=json`
+
+  // //   let weather = await axios.get(url2);
+  // //   console.log(weather);
+
+  // //   this.setState({
+
+  // //     WeatherData: weather.data,
+
+  // //   })
+
+  // }
   render() {
     return (
       <div className='main'>
@@ -57,9 +61,9 @@ class App extends React.Component {
         <p>City Name :{this.state.cityData.display_name}</p>
         <p>Latitude :{this.state.cityData.lat}</p>
         <p>Longitude :{this.state.cityData.lon}</p>
-        {this.state.showMap && 
-        <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`}/>}
-        <Weather />
+        {this.state.showMap &&
+          <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} />}
+        {/* <Weather /> */}
       </div>
     )
   }
