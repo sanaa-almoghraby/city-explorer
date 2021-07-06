@@ -3,6 +3,7 @@ import './App.css';
 import React from 'react';
 import axios from 'axios';
 import Weather from './Weather';
+import Movies from './Movies';
 
 
 
@@ -13,19 +14,21 @@ class App extends React.Component {
       cityData: {},
       showDataofCity: '',
       showMap: false,
-      WeatherData: []
+      WeatherData: [],
+      moviesData: [],
+      showErr:false
     }
   }
   gitdataLocation = async (e) => {
     e.preventDefault();
 
-
+try{
     await this.setState({
       showDataofCity: e.target.city.value
     })
-    
+
     let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_KEY}&q=${this.state.showDataofCity}&format=json`;
-    
+
     let resData = await axios.get(url);
 
 
@@ -42,28 +45,38 @@ class App extends React.Component {
 
     this.funwether();
   }
+    catch (err) {
+      this.setState({
+        showErr: true,
+        showMap: false
+      })
+    }
+  }
 
   funwether = async () => {
     // let city=this.state.showDataofCity
-    const city = this.state.showDataofCity.charAt(0).toUpperCase() + this.state.showDataofCity.slice(1);
+    // const city = this.state.showDataofCity.charAt(0).toUpperCase() + this.state.showDataofCity.slice(1);
 
-    let url2 = `http://class07-back-end.herokuapp.com/getCityInfo?cityy=${city}&format=json`
-    console.log(url2);
-    console.log(this.state.showDataofCity);
-    let weather = await axios.get(url2);
-    console.log('ssssssssss');
-    console.log(weather);
+    // let url2 = `http://class07-back-end.herokuapp.com/getCityInfo?cityy=${city}&format=json`
+    // console.log(url2);
+    // console.log(this.state.showDataofCity);
+    // let weather = await axios.get(url2);
+    // console.log('ssssssssss');
+    // console.log(weather);
+    // =====================================================================
+    let weatherInf = await axios.get(`${process.env.REACT_APP_API}daily?city=${this.state.showDataofCity.toLocaleLowerCase()}`)
+    let moviesInf = await axios.get(`${process.env.REACT_APP_API}movie?&query=${this.state.showDataofCity.toLocaleLowerCase()}`)
 
     this.setState({
 
-      WeatherData: weather.data,
+      WeatherData: weatherInf.data,
+      moviesData:moviesInf.data,
+      showErr:false
 
     })
-    console.log(this.state.WeatherData);
-    console.log(this.state.WeatherData.description);
-
 
   }
+
   render() {
     console.log(this.state.WeatherData);
 
@@ -72,7 +85,7 @@ class App extends React.Component {
         <h1>City Explorer </h1>
         {/* <button onClick={this.gitdataLocation}>Explore!</button> */}
         <form onSubmit={this.gitdataLocation} className="form">
-          <input type="text" placeholder="Name of the city" name="city"/>
+          <input type="text" placeholder="Name of the city" name="city" />
           <button type="submit"> Explore! </button>
         </form>
         <p>City Name :{this.state.cityData.display_name}</p>
@@ -80,7 +93,8 @@ class App extends React.Component {
         <p>Longitude :{this.state.cityData.lon}</p>
         {this.state.showMap &&
           <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} />}
-        <Weather WeatherData={this.state.WeatherData}/>
+        <Weather WeatherData={this.state.WeatherData} />
+        <Movies moviesData={this.state.moviesData} />
       </div>
     )
   }
