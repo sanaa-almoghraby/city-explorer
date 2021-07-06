@@ -102,3 +102,25 @@ Start time: __1pm___
 Finish time: _7pm____
 
 Actual time needed to complete: ___7-8h__
+
+
+Name of feature: ______________Lab: Class 07__________________
+
+Estimate of time needed to complete: __5h___
+
+Start time: __1pm___
+
+Finish time: _2am____
+
+Actual time needed to complete: ___15h__
+
+
+Name of feature: ______________Lab: Class 08__________________
+
+Estimate of time needed to complete: __9h___
+
+Start time: __2pm___
+
+Finish time: _3am____
+
+Actual time needed to complete: ___15h__
