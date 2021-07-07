@@ -11,6 +11,7 @@ class MovieCard extends React.Component {
             <div>
                 <Card style={{ width: "30rem" }}>
                     <Card.Body>
+        
                         {this.props.moviesData.map(el =>
                             <>
                                 <Card.Text>

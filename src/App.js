@@ -2,8 +2,8 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
-import Weather from './Weather';
-import Movies from './Movies';
+import Weather from './component/Weather';
+import Movies from './component/Movies';
 
 
 
@@ -34,8 +34,8 @@ try{
 
 
 
-    console.log(resData);
-    console.log(resData.data[0]);
+    // console.log(resData);
+    // console.log(resData.data[0]);
 
     await this.setState({
       cityData: resData.data[0],
@@ -64,8 +64,10 @@ try{
     // console.log('ssssssssss');
     // console.log(weather);
     // =====================================================================
-    let weatherInf = await axios.get(`${process.env.REACT_APP_API}daily?city=${this.state.showDataofCity.toLocaleLowerCase()}`)
-    let moviesInf = await axios.get(`${process.env.REACT_APP_API}movie?&query=${this.state.showDataofCity.toLocaleLowerCase()}`)
+    console.log('ssssss');
+    // localhost:3001/getCityInfo?cityy=Amman
+    let weatherInf = await axios.get(`${process.env.REACT_APP_API}getCityInfo?cityy=${this.state.showDataofCity}`)
+    let moviesInf = await axios.get(`${process.env.REACT_APP_API}moviedata?movieName=${this.state.showDataofCity}`)
 
     this.setState({
 
@@ -74,11 +76,12 @@ try{
       showErr:false
 
     })
+    console.log('ssss',this.state.WeatherData);
+    console.log(weatherInf);
 
   }
 
   render() {
-    console.log(this.state.WeatherData);
 
     return (
       <div className='main'>
