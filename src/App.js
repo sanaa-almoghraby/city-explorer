@@ -64,6 +64,7 @@ try{
     // console.log('ssssssssss');
     // console.log(weather);
     // =====================================================================
+    try{
     console.log('ssssss');
     // localhost:3001/getCityInfo?cityy=Amman
     let weatherInf = await axios.get(`${process.env.REACT_APP_API}getCityInfo?cityy=${this.state.showDataofCity}`)
@@ -78,6 +79,15 @@ try{
     })
     console.log('ssss',this.state.WeatherData);
     console.log(weatherInf);
+  }catch(error){
+    console.log("error in sending axios request .....");
+
+    this.setState({
+      showErr: true,
+      showMap: false
+    })
+
+  }
 
   }
 
@@ -96,7 +106,8 @@ try{
         <p>Longitude :{this.state.cityData.lon}</p>
         {this.state.showMap &&
           <img alt='' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} />}
-        <Weather WeatherData={this.state.WeatherData} />
+        {this.state.showMap &&
+        <Weather WeatherData={this.state.WeatherData} />}
         <Movies moviesData={this.state.moviesData} />
       </div>
     )
