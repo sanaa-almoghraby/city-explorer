@@ -8,8 +8,8 @@ class MovieCard extends React.Component {
     render() {
         console.log(this.props);
         return (
-            <div>
-                <Card style={{ width: "30rem" }}>
+            <div className="moviesdiv">
+                <Card style={{ width: "20rem"}} className="cardstyl">
                     <Card.Body>
         
                         {this.props.moviesData.map(el =>

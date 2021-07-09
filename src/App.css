@@ -42,6 +42,20 @@
 h1{
   text-align: center;
 }
+img{
+  width: 250px;
+  height: 250px;
+  
+}
+.cardstyl{
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+.moviesdiv{
+  display: inline-block;
+  margin: 10px;
+}
 /* .main{
   background-repeat: no-repeat;
   background-size: cover; 
