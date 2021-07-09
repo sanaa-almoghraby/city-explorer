@@ -8,8 +8,8 @@ class WeatherCard extends React.Component {
     render() {
         console.log(this.props);
         return (
-            <div>
-                <Card style={{ width: "30rem" }}>
+            <div className="weatherdiv">
+                <Card style={{ width: "30rem" }} className="cardstyl">
                     <Card.Body>
                         {this.props.WeatherData.map(day =>
                             <>
