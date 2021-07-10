@@ -134,3 +134,15 @@ Start time: __2pm___
 Finish time: _5am____
 
 Actual time needed to complete: ___2h__
+=====================================================================
+Name of feature: _______________Lab: Class 10_________________
+
+Estimate of time needed to complete: ___1h__
+
+Start time: ___1pm__
+
+Finish time: ___3pm__
+
+Actual time needed to complete: __1h___
+
+without do STRETCH
